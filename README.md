@@ -2,6 +2,8 @@
 
 Build for the [Blackcoin](www.blackcoin.co) community to use as they see fit.
 
+You can access it here: [https://blackcoin-ticker.herokuapp.com/](https://blackcoin-ticker.herokuapp.com/)
+
 # Personal Motivation
 
 I have been following Blackcoin and the community around for a while,
