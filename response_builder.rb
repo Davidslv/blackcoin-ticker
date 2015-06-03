@@ -3,27 +3,27 @@ require 'unirest'
 require 'json'
 
 class ResponseBuilder
-  CRYPTONATOR_API_URL        = 'https://www.cryptonator.com/api/ticker/blk'
+  CRYPTONATOR_API_URL = 'https://www.cryptonator.com/api/ticker/blk'
 
   FIATS = %w(eur gbp usd pln rur cny)
   CRYPTO_CURRENCY = %w(btc ltc doge xmr)
 
   def deliver
-    blk_usd
-  end
+    hash = {}
 
-  private
+    (FIATS + CRYPTO_CURRENCY).each do |fiat|
+      response = Unirest.get("#{CRYPTONATOR_API_URL}-#{fiat}")
+      json     = response.body['ticker']
 
-  def blk_usd
-    response = Unirest.get("#{CRYPTONATOR_API_URL}-usd")
-    json     = response.body['ticker']
+      hash.merge!({
+        json['target'] => {
+          'price'  => json['price'],
+          'volume' => json['volume'],
+          'change' => json['change']
+        }
+      })
+    end
 
-    {
-      json['target'] => {
-        'price'  => json['price'],
-        'volume' => json['volume'],
-        'change' => json['change']
-      }
-    }.to_json
+    hash.to_json
   end
 end
