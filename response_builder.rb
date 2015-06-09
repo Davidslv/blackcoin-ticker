@@ -5,7 +5,7 @@ require 'json'
 class ResponseBuilder
   CRYPTONATOR_API_URL = 'https://www.cryptonator.com/api/ticker/blk'
 
-  FIATS = %w(eur gbp usd pln rur cny)
+  FIATS = %w(eur gbp usd cad pln rur cny)
   CRYPTO_CURRENCY = %w(btc ltc doge xmr)
 
   def deliver
